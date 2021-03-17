@@ -18,6 +18,8 @@
 
 from enum import IntEnum, unique
 
+from pyrogram.types import Message
+
 
 @unique
 class Types(IntEnum):
@@ -34,7 +36,7 @@ class Types(IntEnum):
     CONTACT = 11
 
 
-async def get_message_type(m):
+async def get_message_type(m: Message):
     """Get type of message."""
     if m.text or m.caption:
         content = None
@@ -92,7 +94,7 @@ async def get_message_type(m):
     return content, message_type
 
 
-async def get_note_type(m):
+async def get_note_type(m: Message):
     """Get type of note."""
     if len(m.text.split()) <= 1:
         return None, None, None, None
@@ -159,7 +161,7 @@ async def get_note_type(m):
     return note_name, text, data_type, content
 
 
-async def get_welcome_type(m):
+async def get_welcome_type(m: Message):
     """Get type of welcome."""
     data_type = None
     content = None
@@ -235,5 +237,60 @@ async def get_welcome_type(m):
             if len(text) >= 2:
                 text = m.text.markdown.split(None, 1)[1]
         data_type = Types.TEXT
+
+    return text, data_type, content
+
+
+async def get_filter_type(m: Message):
+
+    if not m.reply_to_message and m.text and len(m.text.split()) >= 3:
+        content = None
+        text = m.text.split(None, 2)[2]
+        data_type = Types.TEXT
+
+    elif m.reply_to_message and m.reply_to_message.text and len(m.text.split()) >= 2:
+        content = None
+        text = m.reply_to_message.text
+        data_type = Types.TEXT
+
+    elif m.reply_to_message and m.reply_to_message.sticker:
+        content = m.reply_to_message.sticker.file_id
+        text = None
+        data_type = Types.STICKER
+
+    elif m.reply_to_message and m.reply_to_message.document:
+        content = m.reply_to_message.document.file_id
+        text = m.reply_to_message.caption
+        data_type = Types.DOCUMENT
+
+    elif m.reply_to_message and m.reply_to_message.photo:
+        content = m.reply_to_message.photo[-1].file_id  # last elem = best quality
+        text = m.reply_to_message.caption
+        data_type = Types.PHOTO
+
+    elif m.reply_to_message and m.reply_to_message.audio:
+        content = m.reply_to_message.audio.file_id
+        text = m.reply_to_message.caption
+        data_type = Types.AUDIO
+
+    elif m.reply_to_message and m.reply_to_message.voice:
+        content = m.reply_to_message.voice.file_id
+        text = m.reply_to_message.caption
+        data_type = Types.VOICE
+
+    elif m.reply_to_message and m.reply_to_message.video:
+        content = m.reply_to_message.video.file_id
+        text = m.reply_to_message.caption
+        data_type = Types.VIDEO
+
+    elif m.reply_to_message and m.reply_to_message.video_note:
+        content = m.reply_to_message.video_note.file_id
+        text = None
+        data_type = Types.VIDEO_NOTE
+
+    else:
+        text = None
+        data_type = None
+        content = None
 
     return text, data_type, content

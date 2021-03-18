@@ -97,12 +97,6 @@ async def gen_start_kb(q):
                     url=f"https://t.me/{BOT_USERNAME}?startgroup=new",
                 ),
             ],
-            [
-                InlineKeyboardButton(
-                    f"🗃️ {(tlang(q, 'start.source_code'))}",
-                    url="https://github.com/Divkix/MiraiRobot",
-                ),
-            ],
         ],
     )
     return keyboard

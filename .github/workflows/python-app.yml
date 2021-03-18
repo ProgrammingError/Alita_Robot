@@ -22,7 +22,7 @@ jobs:
 
         with:
 
-          find: "Alita_robot"
+          find: "Alita_Robot"
 
           replace: "MiraiRobot"
 

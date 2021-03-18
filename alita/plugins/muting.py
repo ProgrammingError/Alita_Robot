@@ -21,7 +21,7 @@ from pyrogram.errors import ChatAdminRequired, RightForbidden, RPCError
 from pyrogram.types import ChatPermissions, Message
 
 from alita import LOGGER, PREFIX_HANDLER, SUPPORT_GROUP, SUPPORT_STAFF
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.tr_engine import tlang
 from alita.utils.admin_cache import ADMIN_CACHE
 from alita.utils.custom_filters import restrict_filter
@@ -32,10 +32,10 @@ __PLUGIN__ = "plugins.muting.main"
 __help__ = "plugins.muting.help"
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("mute", PREFIX_HANDLER) & filters.group & restrict_filter,
 )
-async def mute_usr(c: Alita, m: Message):
+async def mute_usr(c: Mirai, m: Message):
 
     user_id, user_first_name = await extract_user(c, m)
 
@@ -86,10 +86,10 @@ async def mute_usr(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("unmute", PREFIX_HANDLER) & filters.group & restrict_filter,
 )
-async def unmute_usr(c: Alita, m: Message):
+async def unmute_usr(c: Mirai, m: Message):
 
     user_id, user_first_name = await extract_user(c, m)
 

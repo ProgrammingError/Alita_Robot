@@ -21,7 +21,7 @@ from pyrogram.errors import ChatAdminRequired, RightForbidden, RPCError
 from pyrogram.types import Message
 
 from alita import LOGGER, PREFIX_HANDLER, SUPPORT_GROUP
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.antichannelpin_db import AntiChannelPin
 from alita.tr_engine import tlang
 from alita.utils.custom_filters import admin_filter
@@ -33,7 +33,7 @@ __help__ = "plugins.pins.help"
 antichanneldb = AntiChannelPin()
 
 
-@Alita.on_message(filters.command("pin", PREFIX_HANDLER) & filters.group & admin_filter)
+@Mirai.on_message(filters.command("pin", PREFIX_HANDLER) & filters.group & admin_filter)
 async def pin_message(_, m: Message):
 
     pin_args = m.text.split(None, 1)
@@ -74,10 +74,10 @@ async def pin_message(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("unpin", PREFIX_HANDLER) & filters.group & admin_filter,
 )
-async def unpin_message(c: Alita, m: Message):
+async def unpin_message(c: Mirai, m: Message):
 
     try:
         if m.reply_to_message:
@@ -101,10 +101,10 @@ async def unpin_message(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("unpinall", PREFIX_HANDLER) & filters.group & admin_filter,
 )
-async def unpinall_message(c: Alita, m: Message):
+async def unpinall_message(c: Mirai, m: Message):
 
     try:
         await c.unpin_all_chat_messages(m.chat.id)
@@ -125,7 +125,7 @@ async def unpinall_message(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("antichannelpin", PREFIX_HANDLER) & filters.group & admin_filter,
 )
 async def anti_channel_pin(_, m: Message):

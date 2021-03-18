@@ -31,7 +31,7 @@ from alita import (
     SUPPORT_GROUP,
     SUPPORT_STAFF,
 )
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.antispam_db import GBan
 from alita.tr_engine import tlang
 from alita.utils.clean_file import remove_markdown_and_html
@@ -43,8 +43,8 @@ from alita.utils.parser import mention_html
 db = GBan()
 
 
-@Alita.on_message(filters.command(["gban", "globalban"], PREFIX_HANDLER) & sudo_filter)
-async def gban(c: Alita, m: Message):
+@Mirai.on_message(filters.command(["gban", "globalban"], PREFIX_HANDLER) & sudo_filter)
+async def gban(c: Mirai, m: Message):
 
     if len(m.text.split()) == 1:
         await m.reply_text(tlang(m, "antispam.gban.how_to"))
@@ -107,11 +107,11 @@ async def gban(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command(["ungban", "unglobalban", "globalunban"], PREFIX_HANDLER)
     & sudo_filter,
 )
-async def ungban(c: Alita, m: Message):
+async def ungban(c: Mirai, m: Message):
 
     if len(m.text.split()) == 1:
         await m.reply_text(tlang(m, "antispam.pass_user_id"))
@@ -157,7 +157,7 @@ async def ungban(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command(["numgbans", "countgbans"], PREFIX_HANDLER) & sudo_filter,
 )
 async def gban_count(_, m: Message):
@@ -167,7 +167,7 @@ async def gban_count(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command(["gbanlist", "globalbanlist"], PREFIX_HANDLER) & sudo_filter,
 )
 async def gban_list(_, m: Message):

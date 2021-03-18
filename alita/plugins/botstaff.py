@@ -21,15 +21,15 @@ from pyrogram.errors import RPCError
 from pyrogram.types import Message
 
 from alita import DEV_PREFIX_HANDLER, DEV_USERS, OWNER_ID, SUDO_USERS, WHITELIST_USERS
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.utils.custom_filters import dev_filter
 from alita.utils.parser import mention_html
 
 __PLUGIN__ = "Botstaff"
 
 
-@Alita.on_message(filters.command("botstaff", DEV_PREFIX_HANDLER) & dev_filter)
-async def botstaff(c: Alita, m: Message):
+@Mirai.on_message(filters.command("botstaff", DEV_PREFIX_HANDLER) & dev_filter)
+async def botstaff(c: Mirai, m: Message):
     try:
         owner = await c.get_users(OWNER_ID)
         reply = f"<b>🌟 Owner:</b> {(await mention_html(owner.first_name, OWNER_ID))} (<code>{OWNER_ID}</code>)\n"

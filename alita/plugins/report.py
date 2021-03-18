@@ -29,7 +29,7 @@ from pyrogram.types import (
 )
 
 from alita import LOGGER, PREFIX_HANDLER, SUPPORT_STAFF
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.reporting_db import Reporting
 from alita.utils.custom_filters import admin_filter
 from alita.utils.parser import mention_html
@@ -41,7 +41,7 @@ __PLUGIN__ = "plugins.reporting.main"
 __help__ = "plugins.reporting.help"
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("reports", PREFIX_HANDLER) & (filters.private | admin_filter),
 )
 async def report_setting(_, m: Message):
@@ -86,11 +86,11 @@ async def report_setting(_, m: Message):
             )
 
 
-@Alita.on_message(
+@Mirai.on_message(
     (filters.command("report", PREFIX_HANDLER) | filters.regex(r"(?i)@admin(s)?"))
     & filters.group,
 )
-async def report_watcher(c: Alita, m: Message):
+async def report_watcher(c: Mirai, m: Message):
 
     if m.chat.type != "supergroup":
         return
@@ -196,8 +196,8 @@ async def report_watcher(c: Alita, m: Message):
     return
 
 
-@Alita.on_callback_query(filters.regex("^report_"))
-async def report_buttons(c: Alita, q: CallbackQuery):
+@Mirai.on_callback_query(filters.regex("^report_"))
+async def report_buttons(c: Mirai, q: CallbackQuery):
     splitter = str(q.data).replace("report_", "").split("=")
     chat_id = int(splitter[0])
     action = str(splitter[1])

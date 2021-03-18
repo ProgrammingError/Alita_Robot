@@ -30,7 +30,7 @@ from pyrogram.errors import (
 from pyrogram.types import Message
 
 from alita import LOGGER, PREFIX_HANDLER, SUPPORT_GROUP
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.tr_engine import tlang
 from alita.utils.admin_cache import ADMIN_CACHE, admin_cache_reload
 from alita.utils.custom_filters import admin_filter, invite_filter, promote_filter
@@ -41,7 +41,7 @@ __PLUGIN__ = "plugins.admin.main"
 __help__ = "plugins.admin.help"
 
 
-@Alita.on_message(filters.command("adminlist", PREFIX_HANDLER) & filters.group)
+@Mirai.on_message(filters.command("adminlist", PREFIX_HANDLER) & filters.group)
 async def adminlist_show(_, m: Message):
     global ADMIN_CACHE
     try:
@@ -99,7 +99,7 @@ async def adminlist_show(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("admincache", PREFIX_HANDLER) & filters.group & admin_filter,
 )
 async def reload_admins(_, m: Message):
@@ -117,10 +117,10 @@ async def reload_admins(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("promote", PREFIX_HANDLER) & filters.group & promote_filter,
 )
-async def promote_usr(c: Alita, m: Message):
+async def promote_usr(c: Mirai, m: Message):
 
     if len(m.text.split()) == 1 and not m.reply_to_message:
         await m.reply_text(tlang(m, "admin.promote.no_target"))
@@ -191,10 +191,10 @@ async def promote_usr(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("demote", PREFIX_HANDLER) & filters.group & promote_filter,
 )
-async def demote_usr(c: Alita, m: Message):
+async def demote_usr(c: Mirai, m: Message):
 
     if len(m.text.split()) == 1 and not m.reply_to_message:
         await m.reply_text(tlang(m, "admin.demote.no_target"))
@@ -258,10 +258,10 @@ async def demote_usr(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("invitelink", PREFIX_HANDLER) & filters.group & invite_filter,
 )
-async def get_invitelink(c: Alita, m: Message):
+async def get_invitelink(c: Mirai, m: Message):
 
     try:
         link = await c.export_chat_invite_link(m.chat.id)

@@ -23,7 +23,7 @@ from pyrogram import filters
 from pyrogram.types import Message
 
 from alita import LOGGER, PREFIX_HANDLER
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.afk_db import AFK
 from alita.tr_engine import tlang
 from alita.utils.extract_user import extract_user
@@ -36,7 +36,7 @@ __PLUGIN__ = "plugins.afk.main"
 __help__ = "plugins.afk.help"
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("afk", PREFIX_HANDLER) & filters.group,
 )
 async def set_afk(_, m: Message):
@@ -62,8 +62,8 @@ async def set_afk(_, m: Message):
     await m.stop_propagation()
 
 
-@Alita.on_message(filters.group & ~filters.bot, group=11)
-async def afk_mentioned(c: Alita, m: Message):
+@Mirai.on_message(filters.group & ~filters.bot, group=11)
+async def afk_mentioned(c: Mirai, m: Message):
 
     # if msg isn't from user, ignore nd return
     if not m.from_user:
@@ -100,8 +100,8 @@ async def afk_mentioned(c: Alita, m: Message):
     await m.stop_propagation()
 
 
-@Alita.on_message(filters.group, group=12)
-async def rem_afk(c: Alita, m: Message):
+@Mirai.on_message(filters.group, group=12)
+async def rem_afk(c: Mirai, m: Message):
 
     if not m.from_user:
         return

@@ -23,7 +23,7 @@ from pyrogram.errors import MessageDeleteForbidden
 from pyrogram.types import Message
 
 from alita import PREFIX_HANDLER
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.tr_engine import tlang
 from alita.utils.custom_filters import admin_filter
 
@@ -31,10 +31,10 @@ __PLUGIN__ = "plugins.purges.main"
 __help__ = "plugins.purges.help"
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("purge", PREFIX_HANDLER) & filters.group & admin_filter,
 )
-async def purge(c: Alita, m: Message):
+async def purge(c: Mirai, m: Message):
 
     if m.chat.type != "supergroup":
         await m.reply_text(tlang(m, "purge.err_basic"))
@@ -76,11 +76,11 @@ async def purge(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("del", PREFIX_HANDLER) & filters.group & admin_filter,
     group=4,
 )
-async def del_msg(c: Alita, m: Message):
+async def del_msg(c: Mirai, m: Message):
 
     if m.reply_to_message:
         if m.chat.type != "supergroup":

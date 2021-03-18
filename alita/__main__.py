@@ -16,7 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 
 if __name__ == "__main__":
-    Alita().run()
+    Mirai().run()

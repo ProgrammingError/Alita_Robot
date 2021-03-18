@@ -27,7 +27,7 @@ from pyrogram.types import (
 )
 
 from alita import PREFIX_HANDLER
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.approve_db import Approve
 from alita.database.blacklist_db import Blacklist
 from alita.tr_engine import tlang
@@ -43,7 +43,7 @@ db = Blacklist()
 app_db = Approve()
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("blacklist", PREFIX_HANDLER) & filters.group & admin_filter,
 )
 async def view_blacklist(_, m: Message):
@@ -70,7 +70,7 @@ async def view_blacklist(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("addblacklist", PREFIX_HANDLER) & filters.group & admin_filter,
 )
 async def add_blacklist(_, m: Message):
@@ -98,7 +98,7 @@ async def add_blacklist(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command(["rmblacklist", "unblacklist"], PREFIX_HANDLER)
     & filters.group
     & admin_filter,
@@ -129,7 +129,7 @@ async def rm_blacklist(_, m: Message):
     return
 
 
-@Alita.on_message(filters.command("blaction", PREFIX_HANDLER) & filters.group)
+@Mirai.on_message(filters.command("blaction", PREFIX_HANDLER) & filters.group)
 async def set_bl_action(_, m: Message):
     if len(m.text.split()) == 2:
         action = m.text.split(None, 1)[1]
@@ -148,7 +148,7 @@ async def set_bl_action(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("rmallblacklist", PREFIX_HANDLER) & filters.group & owner_filter,
 )
 async def rm_allblacklist(_, m: Message):
@@ -175,7 +175,7 @@ async def rm_allblacklist(_, m: Message):
     return
 
 
-@Alita.on_callback_query(filters.regex("^rm_allbl."))
+@Mirai.on_callback_query(filters.regex("^rm_allbl."))
 async def rm_allbl_callback(_, q: CallbackQuery):
     user_id = q.data.split(".")[-2]
     name = q.data.split(".")[-1]

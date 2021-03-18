@@ -29,7 +29,7 @@ from pyrogram.types import (
 )
 
 from alita import DEV_PREFIX_HANDLER, LOGGER
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.antispam_db import GBan
 from alita.database.chats_db import Chats
 from alita.utils.custom_filters import dev_filter
@@ -40,7 +40,7 @@ user_db = Chats()
 __PLUGIN__ = "Database Cleaning"
 
 
-async def get_invalid_chats(c: Alita, m: Message, remove: bool = False):
+async def get_invalid_chats(c: Mirai, m: Message, remove: bool = False):
     chats = user_db.get_all_chats()
     kicked_chats, progress = 0, 0
     chat_list = []
@@ -84,7 +84,7 @@ async def get_invalid_chats(c: Alita, m: Message, remove: bool = False):
     return kicked_chats
 
 
-async def get_invalid_gban(c: Alita, _, remove: bool = False):
+async def get_invalid_gban(c: Mirai, _, remove: bool = False):
     banned = gban_db.get_gban_list()
     ungbanned_users = 0
     ungban_list = []
@@ -111,7 +111,7 @@ async def get_invalid_gban(c: Alita, _, remove: bool = False):
     return ungbanned_users
 
 
-async def get_muted_chats(c: Alita, m: Message, leave: bool = False):
+async def get_muted_chats(c: Mirai, m: Message, leave: bool = False):
     chat_id = m.chat.id
     chats = user_db.get_all_chats()
     muted_chats, progress = 0, 0
@@ -159,7 +159,7 @@ async def get_muted_chats(c: Alita, m: Message, leave: bool = False):
     return muted_chats
 
 
-@Alita.on_message(filters.command("dbclean", DEV_PREFIX_HANDLER) & dev_filter)
+@Mirai.on_message(filters.command("dbclean", DEV_PREFIX_HANDLER) & dev_filter)
 async def dbcleanxyz(_, m: Message):
     buttons = [
         [InlineKeyboardButton("Invalid Chats", callback_data="dbclean.invalidchats")],
@@ -175,8 +175,8 @@ async def dbcleanxyz(_, m: Message):
     return
 
 
-@Alita.on_callback_query(filters.regex("^dbclean_"))
-async def dbclean_callback(c: Alita, q: CallbackQuery):
+@Mirai.on_callback_query(filters.regex("^dbclean_"))
+async def dbclean_callback(c: Mirai, q: CallbackQuery):
     args = q.data.split(".")
     # Invalid Chats
     if args[1] == "invalidchats":
@@ -256,8 +256,8 @@ async def dbclean_callback(c: Alita, q: CallbackQuery):
     return
 
 
-@Alita.on_callback_query(filters.regex("^remove."))
-async def db_clean_callbackAction(c: Alita, q: CallbackQuery):
+@Mirai.on_callback_query(filters.regex("^remove."))
+async def db_clean_callbackAction(c: Mirai, q: CallbackQuery):
     try:
         args = q.data.split(".")[1]
 

@@ -35,9 +35,9 @@
 </p>
 
 
-Alita is a Telegram Group managment bot made using **[Pyrogram](https://github.com/pyrogram/pyrogram) _async version_** and **[Python](https://python.org)**, which makes it modern and faster than most of the exisitng Telegram Chat Managers.
+Mirai is a Telegram Group managment bot made using **[Pyrogram](https://github.com/pyrogram/pyrogram) _async version_** and **[Python](https://python.org)**, which makes it modern and faster than most of the exisitng Telegram Chat Managers.
 
-**Alita's features over other bots:**
+**Mirai's features over other bots:**
 - Modern
 - Fast
 - Fully asynchronous
@@ -48,10 +48,10 @@ Alita is a Telegram Group managment bot made using **[Pyrogram](https://github.c
 Can be found on Telegram as [@MiraiRobot](https://t.me/MiraiRobot)</br>
 This runs the stable version, aka [production](https://github.com/Divkix/MiraiRobot/tree/production) branch.
 
-Beta Version: [@AlitaBetaBot](https://t.me/AlitaBetaBot)</br>
+Beta Version: [@MiraiBetaBot](https://t.me/MiraiBetaBot)</br>
 This runs on beta version, which is from [main](https://github.com/Divkix/MiraiRobot/tree/main) branch.
 
-Alita is currently available in 4 Languages as of now:
+Mirai is currently available in 4 Languages as of now:
 - **US English**
 - **Spanish**
 - **French**

@@ -26,7 +26,7 @@ from pyrogram.types import (
 )
 
 from alita import HELP_COMMANDS, LOGGER, OWNER_ID, PREFIX_HANDLER, VERSION
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.tr_engine import tlang
 
 
@@ -141,7 +141,7 @@ async def get_help_msg(m, help_option: str):
     return help_msg, help_kb
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("start", PREFIX_HANDLER) & (filters.group | filters.private),
 )
 async def start(_, m: Message):
@@ -177,7 +177,7 @@ async def start(_, m: Message):
     return
 
 
-@Alita.on_callback_query(filters.regex("^start_back$"))
+@Mirai.on_callback_query(filters.regex("^start_back$"))
 async def start_back(_, q: CallbackQuery):
 
     try:
@@ -191,7 +191,7 @@ async def start_back(_, q: CallbackQuery):
     return
 
 
-@Alita.on_callback_query(filters.regex("^commands$"))
+@Mirai.on_callback_query(filters.regex("^commands$"))
 async def commands_menu(_, q: CallbackQuery):
 
     keyboard = InlineKeyboardMarkup(
@@ -219,7 +219,7 @@ async def commands_menu(_, q: CallbackQuery):
     return
 
 
-@Alita.on_message(filters.command("help", PREFIX_HANDLER))
+@Mirai.on_message(filters.command("help", PREFIX_HANDLER))
 async def help_menu(_, m: Message):
 
     from alita import BOT_USERNAME
@@ -285,7 +285,7 @@ async def help_menu(_, m: Message):
     return
 
 
-@Alita.on_callback_query(filters.regex("^get_mod."))
+@Mirai.on_callback_query(filters.regex("^get_mod."))
 async def get_module_info(_, q: CallbackQuery):
 
     module = q.data.split(".", 1)[1]
@@ -309,8 +309,8 @@ async def get_module_info(_, q: CallbackQuery):
     return
 
 
-@Alita.on_callback_query(filters.regex("^infos$"))
-async def infos(c: Alita, q: CallbackQuery):
+@Mirai.on_callback_query(filters.regex("^infos$"))
+async def infos(c: Mirai, q: CallbackQuery):
 
     _owner = await c.get_users(OWNER_ID)
     res = (tlang(q, "start.info_page")).format(

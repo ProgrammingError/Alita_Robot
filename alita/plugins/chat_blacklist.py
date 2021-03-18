@@ -23,7 +23,7 @@ from pyrogram.errors import PeerIdInvalid, RPCError
 from pyrogram.types import Message
 
 from alita import DEV_PREFIX_HANDLER, LOGGER
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.group_blacklist import GroupBlacklist
 from alita.utils.custom_filters import dev_filter
 
@@ -33,8 +33,8 @@ db = GroupBlacklist()
 __PLUGIN__ = "Chat Blacklist"
 
 
-@Alita.on_message(filters.command("blchat", DEV_PREFIX_HANDLER) & dev_filter)
-async def blacklist_chat(c: Alita, m: Message):
+@Mirai.on_message(filters.command("blchat", DEV_PREFIX_HANDLER) & dev_filter)
+async def blacklist_chat(c: Mirai, m: Message):
     if len(m.text.split()) >= 2:
         chat_ids = m.text.split()[1:]
         replymsg = await m.reply_text(f"Adding {len(chat_ids)} chats to blacklist")
@@ -56,10 +56,10 @@ async def blacklist_chat(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command(["rmblchat", "unblchat"], DEV_PREFIX_HANDLER) & dev_filter,
 )
-async def unblacklist_chat(c: Alita, m: Message):
+async def unblacklist_chat(c: Mirai, m: Message):
     if len(m.text.split()) >= 2:
         chat_ids = m.text.split()[1:]
         replymsg = await m.reply_text(f"Adding {len(chat_ids)} chats to blacklist")
@@ -85,7 +85,7 @@ async def unblacklist_chat(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command(["blchatlist", "blchats"], DEV_PREFIX_HANDLER) & dev_filter,
 )
 async def list_blacklist_chats(_, m: Message):

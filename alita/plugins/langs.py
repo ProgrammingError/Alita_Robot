@@ -27,7 +27,7 @@ from pyrogram.types import (
 )
 
 from alita import PREFIX_HANDLER
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.lang_db import Langs
 from alita.tr_engine import lang_dict, tlang
 from alita.utils.custom_filters import admin_filter
@@ -72,7 +72,7 @@ async def gen_langs_kb():
     return kb
 
 
-@Alita.on_callback_query(filters.regex("^chlang$"))
+@Mirai.on_callback_query(filters.regex("^chlang$"))
 async def chlang_callback(_, q: CallbackQuery):
 
     keyboard = InlineKeyboardMarkup(
@@ -94,14 +94,14 @@ async def chlang_callback(_, q: CallbackQuery):
     return
 
 
-@Alita.on_callback_query(filters.regex("^close$"))
+@Mirai.on_callback_query(filters.regex("^close$"))
 async def close_btn_callback(_, q: CallbackQuery):
     await q.message.delete()
     await q.answer()
     return
 
 
-@Alita.on_callback_query(filters.regex("^set_lang."))
+@Mirai.on_callback_query(filters.regex("^set_lang."))
 async def set_lang_callback(_, q: CallbackQuery):
 
     lang_code = q.data.split(".")[1]
@@ -139,7 +139,7 @@ async def set_lang_callback(_, q: CallbackQuery):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command(["lang", "setlang"], PREFIX_HANDLER)
     & ((admin_filter & filters.group) | filters.private),
 )

@@ -27,7 +27,7 @@ from pyrogram.types import (
 )
 
 from alita import PREFIX_HANDLER, SUPPORT_GROUP
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.approve_db import Approve
 from alita.utils.custom_filters import admin_filter, owner_filter
 from alita.utils.extract_user import extract_user
@@ -40,10 +40,10 @@ __PLUGIN__ = "plugins.approve.main"
 __help__ = "plugins.approve.help"
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("approve", PREFIX_HANDLER) & filters.group & admin_filter,
 )
-async def approve_user(c: Alita, m: Message):
+async def approve_user(c: Mirai, m: Message):
 
     chat_title = m.chat.title
     chat_id = m.chat.id
@@ -103,12 +103,12 @@ async def approve_user(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command(["disapprove", "unapprove"], PREFIX_HANDLER)
     & filters.group
     & admin_filter,
 )
-async def disapprove_user(c: Alita, m: Message):
+async def disapprove_user(c: Mirai, m: Message):
 
     chat_title = m.chat.title
     chat_id = m.chat.id
@@ -156,7 +156,7 @@ async def disapprove_user(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("approved", PREFIX_HANDLER) & filters.group & admin_filter,
 )
 async def check_approved(_, m: Message):
@@ -183,10 +183,10 @@ async def check_approved(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("approval", PREFIX_HANDLER) & filters.group & admin_filter,
 )
-async def check_approval(c: Alita, m: Message):
+async def check_approval(c: Mirai, m: Message):
 
     user_id, user_first_name = await extract_user(c, m)
     check_approve = db.check_approve(m.chat.id, user_id)
@@ -207,7 +207,7 @@ async def check_approval(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("unapproveall", PREFIX_HANDLER) & filters.group & owner_filter,
 )
 async def unapproveall_users(_, m: Message):
@@ -234,7 +234,7 @@ async def unapproveall_users(_, m: Message):
     return
 
 
-@Alita.on_callback_query(filters.regex("^unapprove_all."))
+@Mirai.on_callback_query(filters.regex("^unapprove_all."))
 async def unapproveall_callback(_, q: CallbackQuery):
     user_id = q.data.split(".")[-2]
     name = q.data.split(".")[-1]

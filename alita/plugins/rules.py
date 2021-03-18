@@ -28,7 +28,7 @@ from pyrogram.types import (
 )
 
 from alita import BOT_USERNAME, LOGGER, PREFIX_HANDLER
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.rules_db import Rules
 from alita.tr_engine import tlang
 from alita.utils.custom_filters import admin_filter
@@ -39,8 +39,8 @@ __PLUGIN__ = "plugins.rules.main"
 __help__ = "plugins.rules.help"
 
 
-@Alita.on_message(filters.command("rules", PREFIX_HANDLER) & filters.group)
-async def get_rules(c: Alita, m: Message):
+@Mirai.on_message(filters.command("rules", PREFIX_HANDLER) & filters.group)
+async def get_rules(c: Mirai, m: Message):
 
     chat_id = m.chat.id
     rules = db.get_rules(chat_id)
@@ -99,7 +99,7 @@ async def get_rules(c: Alita, m: Message):
         )
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("setrules", PREFIX_HANDLER) & filters.group & admin_filter,
 )
 async def set_rules(_, m: Message):
@@ -119,7 +119,7 @@ async def set_rules(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("privrules", PREFIX_HANDLER) & filters.group & admin_filter,
 )
 async def priv_rules(_, m: Message):
@@ -148,7 +148,7 @@ async def priv_rules(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("clearrules", PREFIX_HANDLER) & filters.group & admin_filter,
 )
 async def clear_rules(_, m: Message):
@@ -172,7 +172,7 @@ async def clear_rules(_, m: Message):
     return
 
 
-@Alita.on_callback_query(filters.regex("^clear.rules$") & admin_filter)
+@Mirai.on_callback_query(filters.regex("^clear.rules$") & admin_filter)
 async def clearrules_callback(_, q: CallbackQuery):
     db.clear_rules(q.message.chat.id)
     await q.message.edit_text(tlang(q, "rules.cleared"))

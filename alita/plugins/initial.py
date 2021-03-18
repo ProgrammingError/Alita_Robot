@@ -21,7 +21,7 @@ from pyrogram.errors import RPCError
 from pyrogram.types import Message
 
 from alita import LOGGER
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.antiflood_db import AntiFlood
 from alita.database.approve_db import Approve
 from alita.database.blacklist_db import Blacklist
@@ -44,7 +44,7 @@ approvedb = Approve()
 reportdb = Reporting()
 
 
-@Alita.on_message(filters.group, group=-1)
+@Mirai.on_message(filters.group, group=-1)
 async def initial_works(_, m: Message):
     try:
         if m.migrate_to_chat_id or m.migrate_from_chat_id:

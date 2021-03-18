@@ -35,7 +35,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from speedtest import Speedtest
 
 from alita import DEV_PREFIX_HANDLER, LOGFILE, LOGGER, MESSAGE_DUMP, UPTIME
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.chats_db import Chats
 from alita.tr_engine import tlang
 from alita.utils.aiohttp_helper import AioHttp
@@ -48,8 +48,8 @@ from alita.utils.paste import paste
 chatdb = Chats()
 
 
-@Alita.on_message(filters.command("logs", DEV_PREFIX_HANDLER) & dev_filter)
-async def send_log(c: Alita, m: Message):
+@Mirai.on_message(filters.command("logs", DEV_PREFIX_HANDLER) & dev_filter)
+async def send_log(c: Mirai, m: Message):
 
     replymsg = await m.reply_text("Sending logs...!")
     await c.send_message(
@@ -70,8 +70,8 @@ async def send_log(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(filters.command("ginfo", DEV_PREFIX_HANDLER) & sudo_filter)
-async def group_info(c: Alita, m: Message):
+@Mirai.on_message(filters.command("ginfo", DEV_PREFIX_HANDLER) & sudo_filter)
+async def group_info(c: Mirai, m: Message):
 
     if not len(m.text.split()) == 2:
         await m.reply_text(
@@ -94,8 +94,8 @@ async def group_info(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(filters.command("speedtest", DEV_PREFIX_HANDLER) & dev_filter)
-async def test_speed(c: Alita, m: Message):
+@Mirai.on_message(filters.command("speedtest", DEV_PREFIX_HANDLER) & dev_filter)
+async def test_speed(c: Mirai, m: Message):
 
     await c.send_message(
         MESSAGE_DUMP,
@@ -117,7 +117,7 @@ async def test_speed(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(filters.command("neofetch", DEV_PREFIX_HANDLER) & dev_filter)
+@Mirai.on_message(filters.command("neofetch", DEV_PREFIX_HANDLER) & dev_filter)
 async def neofetch_stats(_, m: Message):
     cmd = "neofetch --stdout"
 
@@ -144,8 +144,8 @@ async def neofetch_stats(_, m: Message):
     return
 
 
-@Alita.on_message(filters.command(["eval", "py"], DEV_PREFIX_HANDLER) & dev_filter)
-async def evaluate_code(c: Alita, m: Message):
+@Mirai.on_message(filters.command(["eval", "py"], DEV_PREFIX_HANDLER) & dev_filter)
+async def evaluate_code(c: Mirai, m: Message):
 
     if len(m.text.split()) == 1:
         await m.reply_text(tlang(m, "dev.execute_cmd_err"))
@@ -207,7 +207,7 @@ async def aexec(code, c, m):
     return await locals()["__aexec"](c, m)
 
 
-@Alita.on_message(filters.command(["exec", "sh"], DEV_PREFIX_HANDLER) & dev_filter)
+@Mirai.on_message(filters.command(["exec", "sh"], DEV_PREFIX_HANDLER) & dev_filter)
 async def execution(_, m: Message):
 
     if len(m.text.split()) == 1:
@@ -253,8 +253,8 @@ async def execution(_, m: Message):
     return
 
 
-@Alita.on_message(filters.command("ip", DEV_PREFIX_HANDLER) & dev_filter)
-async def public_ip(c: Alita, m: Message):
+@Mirai.on_message(filters.command("ip", DEV_PREFIX_HANDLER) & dev_filter)
+async def public_ip(c: Mirai, m: Message):
 
     ip = (await AioHttp.get_text("https://api.ipify.org"))[0]
     await c.send_message(
@@ -268,8 +268,8 @@ async def public_ip(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(filters.command("chatlist", DEV_PREFIX_HANDLER) & dev_filter)
-async def chats(c: Alita, m: Message):
+@Mirai.on_message(filters.command("chatlist", DEV_PREFIX_HANDLER) & dev_filter)
+async def chats(c: Mirai, m: Message):
     exmsg = await m.reply_text(tlang(m, "dev.chatlist.exporting"))
     await c.send_message(
         MESSAGE_DUMP,
@@ -318,15 +318,15 @@ async def chats(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(filters.command("uptime", DEV_PREFIX_HANDLER) & dev_filter)
+@Mirai.on_message(filters.command("uptime", DEV_PREFIX_HANDLER) & dev_filter)
 async def uptime(_, m: Message):
     up = strftime("%Hh %Mm %Ss", gmtime(time() - UPTIME))
     await m.reply_text((tlang(m, "dev.uptime")).format(uptime=up), quote=True)
     return
 
 
-@Alita.on_message(filters.command("leavechat", DEV_PREFIX_HANDLER) & dev_filter)
-async def leave_chat(c: Alita, m: Message):
+@Mirai.on_message(filters.command("leavechat", DEV_PREFIX_HANDLER) & dev_filter)
+async def leave_chat(c: Mirai, m: Message):
     if len(m.text.split()) != 2:
         await m.reply_text("Supply a chat id which I should leave!", quoet=True)
         return

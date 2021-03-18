@@ -25,14 +25,14 @@ from wikipedia import summary
 from wikipedia.exceptions import DisambiguationError, PageError
 
 from alita import PREFIX_HANDLER
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.utils.clean_file import remove_markdown_and_html
 
 __PLUGIN__ = "plugins.wiki.main"
 __help__ = "plugins.wiki.help"
 
 
-@Alita.on_message(filters.command("wiki", PREFIX_HANDLER))
+@Mirai.on_message(filters.command("wiki", PREFIX_HANDLER))
 async def wiki(_, m: Message):
     if m.reply_to_message:
         search = m.reply_to_message.text

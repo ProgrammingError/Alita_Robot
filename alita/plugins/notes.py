@@ -28,7 +28,7 @@ from pyrogram.types import (
 )
 
 from alita import LOGGER, PREFIX_HANDLER
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.notes_db import Notes
 from alita.utils.custom_filters import admin_filter, owner_filter
 from alita.utils.msg_types import Types, get_note_type
@@ -42,7 +42,7 @@ __PLUGIN__ = "plugins.notes.main"
 __help__ = "plugins.notes.help"
 
 
-async def send_cmd(client: Alita, msgtype):
+async def send_cmd(client: Mirai, msgtype):
     GET_FORMAT = {
         Types.TEXT.value: client.send_message,
         Types.DOCUMENT.value: client.send_document,
@@ -59,7 +59,7 @@ async def send_cmd(client: Alita, msgtype):
     return GET_FORMAT[msgtype]
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("save", PREFIX_HANDLER) & filters.group & admin_filter,
 )
 async def save_note(_, m: Message):
@@ -93,7 +93,7 @@ async def save_note(_, m: Message):
     return
 
 
-async def get_note_func(c: Alita, m: Message, getnotes):
+async def get_note_func(c: Mirai, m: Message, getnotes):
     """Get the note in normal mode, with parsing enabled."""
     msgtype = getnotes["msgtype"]
     if not msgtype:
@@ -162,7 +162,7 @@ async def get_note_func(c: Alita, m: Message, getnotes):
     return
 
 
-async def get_raw_note(c: Alita, m: Message, note: str):
+async def get_raw_note(c: Mirai, m: Message, note: str):
     """Get the note in raw format, so it can updated by just copy and pasting."""
     getnotes = db.get_note(m.chat.id, note)
     all_notes = db.get_all_notes(m.chat.id)
@@ -203,8 +203,8 @@ async def get_raw_note(c: Alita, m: Message, note: str):
     return
 
 
-@Alita.on_message(filters.regex(r"^#[^\s]+") & filters.group)
-async def hash_get(c: Alita, m: Message):
+@Mirai.on_message(filters.regex(r"^#[^\s]+") & filters.group)
+async def hash_get(c: Mirai, m: Message):
 
     # If not from user, then return
     if not m.from_user:
@@ -226,8 +226,8 @@ async def hash_get(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(filters.command("get", PREFIX_HANDLER) & filters.group)
-async def get_note(c: Alita, m: Message):
+@Mirai.on_message(filters.command("get", PREFIX_HANDLER) & filters.group)
+async def get_note(c: Mirai, m: Message):
     if len(m.text.split()) == 2:
         note = (m.text.split())[1]
         all_notes = db.get_all_notes(m.chat.id)
@@ -249,7 +249,7 @@ async def get_note(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(filters.command(["notes", "saved"], PREFIX_HANDLER) & filters.group)
+@Mirai.on_message(filters.command(["notes", "saved"], PREFIX_HANDLER) & filters.group)
 async def local_notes(_, m: Message):
     getnotes = db.get_all_notes(m.chat.id)
     if not getnotes:
@@ -266,7 +266,7 @@ async def local_notes(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("clear", PREFIX_HANDLER) & filters.group & admin_filter,
 )
 async def clear_note(_, m: Message):
@@ -285,7 +285,7 @@ async def clear_note(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("clearall", PREFIX_HANDLER) & filters.group & owner_filter,
 )
 async def clear_allnote(_, m: Message):
@@ -312,7 +312,7 @@ async def clear_allnote(_, m: Message):
     return
 
 
-@Alita.on_callback_query(filters.regex("^clear_notes."))
+@Mirai.on_callback_query(filters.regex("^clear_notes."))
 async def clearallnotes_callback(_, q: CallbackQuery):
     user_id = q.data.split(".")[-2]
     name = q.data.split(".")[-1]

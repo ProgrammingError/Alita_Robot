@@ -35,7 +35,7 @@ from alita import (
     SUPPORT_GROUP,
     WHITELIST_USERS,
 )
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.tr_engine import tlang
 from alita.utils.aiohttp_helper import AioHttp
 from alita.utils.clean_file import remove_markdown_and_html
@@ -47,7 +47,7 @@ __PLUGIN__ = "plugins.utils.main"
 __help__ = "plugins.utils.help"
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("ping", PREFIX_HANDLER) & (filters.group | filters.private),
 )
 async def ping(_, m: Message):
@@ -58,7 +58,7 @@ async def ping(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("lyrics", PREFIX_HANDLER) & (filters.group | filters.private),
 )
 async def get_lyrics(_, m: Message):
@@ -90,10 +90,10 @@ async def get_lyrics(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("id", PREFIX_HANDLER) & (filters.group | filters.private),
 )
-async def id_info(c: Alita, m: Message):
+async def id_info(c: Mirai, m: Message):
 
     if m.chat.type == "supergroup" and not m.reply_to_message:
         await m.reply_text((tlang(m, "utils.id.group_id")).format(group_id=m.chat.id))
@@ -143,7 +143,7 @@ async def id_info(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("gifid", PREFIX_HANDLER) & (filters.group | filters.private),
 )
 async def get_gifid(_, m: Message):
@@ -157,7 +157,7 @@ async def get_gifid(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("github", PREFIX_HANDLER) & (filters.group | filters.private),
 )
 async def github(_, m: Message):
@@ -193,10 +193,10 @@ async def github(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("info", PREFIX_HANDLER) & (filters.group | filters.private),
 )
-async def my_info(c: Alita, m: Message):
+async def my_info(c: Mirai, m: Message):
     infoMsg = await m.reply_text((tlang(m, "utils.user_info.getting_info")), quote=True)
     try:
         user_id = (await extract_user(c, m))[0]
@@ -260,7 +260,7 @@ normiefont = "a b c d e f g h i j k l m n o p q r s t u v w x y z".split()
 weebyfont = "卂 乃 匚 刀 乇 下 厶 卄 工 丁 长 乚 从 𠘨 口 尸 㔿 尺 丂 丅 凵 リ 山 乂 丫 乙".split()
 
 
-@Alita.on_message(filters.command("weebify", PREFIX_HANDLER))
+@Mirai.on_message(filters.command("weebify", PREFIX_HANDLER))
 async def weebify(_, m: Message):
     if len(m.text.split()) >= 2:
         args = m.text.split(None, 1)[1]
@@ -282,7 +282,7 @@ async def weebify(_, m: Message):
     return
 
 
-@Alita.on_message(filters.command("paste", PREFIX_HANDLER))
+@Mirai.on_message(filters.command("paste", PREFIX_HANDLER))
 async def paste_it(_, m: Message):
 
     replymsg = await m.reply_text((tlang(m, "utils.paste.pasting")), quote=True)
@@ -317,7 +317,7 @@ async def paste_it(_, m: Message):
     return
 
 
-@Alita.on_message(filters.command("tr", PREFIX_HANDLER))
+@Mirai.on_message(filters.command("tr", PREFIX_HANDLER))
 async def translate(_, m: Message):
 
     trl = Translator()

@@ -20,7 +20,7 @@ from pyrogram import filters
 from pyrogram.types import Message
 
 from alita import DEV_PREFIX_HANDLER
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database import db
 from alita.database.antichannelpin_db import AntiChannelPin
 from alita.database.antispam_db import GBan
@@ -43,7 +43,7 @@ chatdb = Chats()
 antichanneldb = AntiChannelPin()
 
 
-@Alita.on_message(filters.command("stats", DEV_PREFIX_HANDLER) & dev_filter)
+@Mirai.on_message(filters.command("stats", DEV_PREFIX_HANDLER) & dev_filter)
 async def get_stats(_, m: Message):
     replymsg = await m.reply_text("<b><i>Fetching Stats...</i></b>", quote=True)
     rply = (

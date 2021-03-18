@@ -23,7 +23,7 @@ from pyrogram.errors import ChatAdminRequired, RPCError
 from pyrogram.types import ChatPermissions, Message
 
 from alita import LOGGER, PREFIX_HANDLER
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.approve_db import Approve
 from alita.tr_engine import tlang
 from alita.utils.custom_filters import admin_filter
@@ -35,7 +35,7 @@ __PLUGIN__ = "plugins.locks.main"
 __help__ = "plugins.locks.help"
 
 
-@Alita.on_message(filters.command("locktypes", PREFIX_HANDLER) & filters.group)
+@Mirai.on_message(filters.command("locktypes", PREFIX_HANDLER) & filters.group)
 async def lock_types(_, m: Message):
     locktypes_str = (
         "**Lock Types:**\n"
@@ -58,10 +58,10 @@ async def lock_types(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("lock", PREFIX_HANDLER) & filters.group & admin_filter,
 )
-async def lock_perm(c: Alita, m: Message):
+async def lock_perm(c: Mirai, m: Message):
 
     msg = ""
     media = ""
@@ -183,7 +183,7 @@ async def lock_perm(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("locks", PREFIX_HANDLER) & filters.group & admin_filter,
 )
 async def view_locks(_, m: Message):
@@ -247,10 +247,10 @@ async def view_locks(_, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("unlock", PREFIX_HANDLER) & filters.group & admin_filter,
 )
-async def unlock_perm(c: Alita, m: Message):
+async def unlock_perm(c: Mirai, m: Message):
 
     (
         umsg,

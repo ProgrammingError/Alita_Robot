@@ -400,7 +400,7 @@ strings:
     check_help: "Vérifiez l'aide sur l'utilisation de cette commande."
     close_btn: Fermer
     commands_available: |-
-      Hé là ! Mon nom est Alita.
+      Hé là ! Mon nom est Mirai.
       Je suis ici pour vous aider à gérer vos groupes !
       Commandes disponibles:
       × /start: Start the bot

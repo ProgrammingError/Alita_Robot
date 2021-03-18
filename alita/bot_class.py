@@ -63,7 +63,7 @@ if MESSAGE_DUMP == -100 or not str(MESSAGE_DUMP).startswith("-100"):
     )
 
 
-class Alita(Client):
+class Mirai(Client):
     """Starts the Pyrogram Client on the Bot Token when we do 'python3 -m alita'"""
 
     def __init__(self):

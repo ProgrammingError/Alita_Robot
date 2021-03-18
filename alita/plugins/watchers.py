@@ -25,7 +25,7 @@ from pyrogram.errors import ChatAdminRequired, RPCError, UserAdminInvalid
 from pyrogram.types import ChatPermissions, Message
 
 from alita import LOGGER, MESSAGE_DUMP
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.database.antichannelpin_db import AntiChannelPin
 from alita.database.antispam_db import GBan
 from alita.database.approve_db import Approve
@@ -49,8 +49,8 @@ WATCHER_LOCK = RLock()
 BLACKLIST_PRUNE_USERS = {}
 
 
-@Alita.on_message(filters.group, group=2)
-async def aio_watcher(c: Alita, m: Message):
+@Mirai.on_message(filters.group, group=2)
+async def aio_watcher(c: Mirai, m: Message):
     if not m.from_user:
         return
 
@@ -61,7 +61,7 @@ async def aio_watcher(c: Alita, m: Message):
         await antipin_watcher(c, m)
 
 
-async def gban_watcher(c: Alita, m: Message):
+async def gban_watcher(c: Mirai, m: Message):
     from alita import SUPPORT_GROUP
 
     if not m.from_user:
@@ -232,7 +232,7 @@ async def bl_watcher(_, m: Message):
                 break
 
 
-async def bl_chats_watcher(c: Alita, m: Message):
+async def bl_chats_watcher(c: Mirai, m: Message):
     from alita import SUPPORT_GROUP
 
     if m.chat and (m.chat.id in BLACKLIST_CHATS):
@@ -248,7 +248,7 @@ async def bl_chats_watcher(c: Alita, m: Message):
     return
 
 
-async def antipin_watcher(c: Alita, m: Message):
+async def antipin_watcher(c: Mirai, m: Message):
     try:
         if m.forward_from_chat.type == "channel":
             msg_id = m.message_id

@@ -402,7 +402,7 @@ strings:
     check_help: "Consulte la ayuda sobre cómo utilizar este comando."
     close_btn: Cerrar
     commands_available: |-
-      ¡Hola! Mi nombre es Alita.
+      ¡Hola! Mi nombre es Mirai.
       ¡Estoy aquí para ayudarlo a administrar sus grupos!
       Comandos disponibles:
       × /start: inicia el bot

@@ -42,7 +42,7 @@ from alita import (
     SUPPORT_GROUP,
     SUPPORT_STAFF,
 )
-from alita.bot_class import Alita
+from alita.bot_class import Mirai
 from alita.tr_engine import tlang
 from alita.utils.admin_cache import ADMIN_CACHE
 from alita.utils.clean_file import remove_markdown_and_html
@@ -54,10 +54,10 @@ __PLUGIN__ = "plugins.bans.main"
 __help__ = "plugins.bans.help"
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("kick", PREFIX_HANDLER) & filters.group & restrict_filter,
 )
-async def kick_usr(c: Alita, m: Message):
+async def kick_usr(c: Mirai, m: Message):
 
     if len(m.text.split()) == 1 and not m.reply_to_message:
         await m.reply_text(tlang(m, "admin.kick.no_target"))
@@ -107,10 +107,10 @@ async def kick_usr(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("ban", PREFIX_HANDLER) & filters.group & restrict_filter,
 )
-async def ban_usr(c: Alita, m: Message):
+async def ban_usr(c: Mirai, m: Message):
 
     if len(m.text.split()) == 1 and not m.reply_to_message:
         await m.reply_text(tlang(m, "admin.ban.no_target"))
@@ -160,10 +160,10 @@ async def ban_usr(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(
+@Mirai.on_message(
     filters.command("unban", PREFIX_HANDLER) & filters.group & restrict_filter,
 )
-async def unban_usr(c: Alita, m: Message):
+async def unban_usr(c: Mirai, m: Message):
 
     if len(m.text.split()) == 1 and not m.reply_to_message:
         await m.reply_text(tlang(m, "admin.unban.no_target"))
@@ -205,7 +205,7 @@ async def unban_usr(c: Alita, m: Message):
     return
 
 
-@Alita.on_message(filters.command("banall", DEV_PREFIX_HANDLER) & owner_filter)
+@Mirai.on_message(filters.command("banall", DEV_PREFIX_HANDLER) & owner_filter)
 async def banall_chat(_, m: Message):
     await m.reply_text(
         (tlang(m, "admin.ban.ban_all")),
@@ -221,7 +221,7 @@ async def banall_chat(_, m: Message):
     return
 
 
-@Alita.on_callback_query(filters.regex("^ban.all.members$") & owner_filter)
+@Mirai.on_callback_query(filters.regex("^ban.all.members$") & owner_filter)
 async def banallnotes_callback(_, q: CallbackQuery):
 
     replymsg = await q.message.edit_text(

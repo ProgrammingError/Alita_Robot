@@ -486,7 +486,7 @@ strings:
     commands_btn: Befehle
     group: "Ich bin am Leben: 3"
     info_page: |-
-      @Alita_Robot
+      @MiraiRobot
 
       <b>Version:</b> <i>{version}</i>
 
@@ -495,7 +495,7 @@ strings:
     infos_btn: Info
     language_btn: Sprache
     pm_for_help: "Kontaktieren Sie mich in PM, um die Liste der möglichen Befehle zu erhalten."
-    private: "Hallo! Ich bin Alita_Robot. Um mehr über meine Funktionen zu erfahren, klicken Sie auf die Buttons unten."
+    private: "Hallo! Ich bin MiraiRobot. Um mehr über meine Funktionen zu erfahren, klicken Sie auf die Buttons unten."
     public_help: "Drücken Sie die Taste unten, um Hilfe für <i>{help_option}</i> zu erhalten"
     source_code: "Quellcode"
   utils:

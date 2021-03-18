@@ -1,5 +1,5 @@
 {
-   "name": "Alita_Robot",
+   "name": "MiraiRobot",
    "description": "Alita is a Telegram Group management bot made using Pyrogram and Python, which makes it modern and faster than most of the Telegram chat managers.",
    "keywords": [
       "telegram bot",
@@ -9,7 +9,7 @@
       "alita",
       "alita_robot"
    ],
-   "repository": "https://github.com/Divkix/Alita_Robot",
+   "repository": "https://github.com/Divkix/MiraiRobot",
    "stack": "container",
    "env": {
       "TOKEN": {

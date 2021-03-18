@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "Alita_Robot"
+name = "MiraiRobot"
 version = "0.4.3"
 description = "Alita is a Telegram Group managment bot made using Pyrogram and Python, fully asynchronous, using MongoDB as storage."
 authors = ["Divkix <techdroidroot@gmail.com>"]

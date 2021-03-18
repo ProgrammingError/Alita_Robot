@@ -48,9 +48,6 @@ Mirai is a Telegram Group managment bot made using **[Pyrogram](https://github.c
 Can be found on Telegram as [@MiraiRobot](https://t.me/MiraiRobot)</br>
 This runs the stable version, aka [production](https://github.com/Divkix/MiraiRobot/tree/production) branch.
 
-Beta Version: [@MiraiBetaBot](https://t.me/MiraiBetaBot)</br>
-This runs on beta version, which is from [main](https://github.com/Divkix/MiraiRobot/tree/main) branch.
-
 Mirai is currently available in 4 Languages as of now:
 - **US English**
 - **Spanish**
